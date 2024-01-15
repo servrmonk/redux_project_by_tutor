@@ -10,6 +10,14 @@ const Counter = () => {
   const decrementHandler = () => {
     dispatch({type:'decrement'})
   };
+const increaseHandler = ()=>{
+  dispatch({type:'increase',amount:5})
+
+}
+const decreaseHandler = ()=>{
+  dispatch({type:'increase',amount:5})
+
+}
 
   const counter = useSelector((state) => state.counter);
   const toggleCounterHandler = () => {};
@@ -22,16 +30,14 @@ const Counter = () => {
         <button onClick={incrementHandler}>Increment</button>
         <button onClick={decrementHandler}>Decrement</button>
       </div>
+      <div>
+        <button onClick={increaseHandler}>Increment</button>
+        <button onClick={decreaseHandler}>Decrement</button>
+      </div>
       <br />
       <button onClick={toggleCounterHandler}>Toggle Counter</button>
     </main>
   );
 };
 
-
-// in function component we use hook useDispatch and useSelector hook but hooks r not usable in class based component react redux also export a function connect u connect class based component  to redux actually u can also use this in function
-
-
-
-// export default connect(mapStateToProps,mapDispatchToProps)(Counter);
 export default Counter;
