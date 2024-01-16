@@ -8,17 +8,20 @@ const Counter = () => {
   const counter = useSelector((state) => state.counter);
   const show = useSelector((state) => state.showCounter);
   const incrementHandler = () => {
-    dispatch(counterActions.increment(10)); //pass the value to increase it create {type:some_unnique_identifier,payload:10} payload is not uptoo u it's a default
+    dispatch(counterActions.increment()); 
   };
   const decrementHandler = () => {
     dispatch(counterActions.decrement());
   };
   const increaseHandler = () => {
-    dispatch(counterActions.increase())
+    dispatch(counterActions.increase(5))//pass the value to increase it create {type:some_unnique_identifier,payload:10} payload is not uptoo u it's a default
+  };
+  const decreaseHandler = () => {
+    dispatch(counterActions.decrease(5))
   };
  
   const toggleCounterHandler = () => {
-    dispatch({ type: "toggle" });
+    dispatch(counterActions.toggleCounter());
   };
 
   return (
@@ -30,7 +33,8 @@ const Counter = () => {
         <button onClick={decrementHandler}>Decrement</button>
       </div>
       <div>
-        <button onClick={increaseHandler}>Increment</button>
+        <button onClick={increaseHandler}>Increment5</button>
+        <button onClick={decreaseHandler}>Decrement5</button>
       </div>
       <br />
       <button onClick={toggleCounterHandler}>Toggle Counter</button>
