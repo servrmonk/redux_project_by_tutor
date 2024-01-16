@@ -1,16 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { createStore } from "redux"; // createslice is powerful than createreducer
 
 const initialState = { counter: 0, showCounter: true };
 
-createSlice({
-  //want an obj as an argument ,we r  preparing slice of global state  and we have different pieces of state ex auth status , every slice need a name u can pass any nai
+const counterSlice  = createSlice({
   name: "counterHai",
-  initialState: initialState, //and then reducer
+  initialState: initialState, 
   reducers: {
     //obj all reducer
-    increment(state) {
-      state.counter++;
+    increment(state,action) {
+      state.counter = state.counter + action.payload
     },
     decrement(state) {
       state.counter--;
@@ -19,44 +18,15 @@ createSlice({
       state.counter = state.counter + action.amount;
     },
     toggleCounter(state) {
-      state.showCounter = !state.showCounter,
+      state.showCounter = !state.showCounter
     },
   },
 });
+//for many reducer we can use combine reducer or configureStore like create store but it makes merging multiple reducer  into one reducer  easier there after and pass the object reducer not reducers
 
-const counterReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "increment":
-      // state.counter++
-      return {
-        counter: state.counter + 1, //state.counter ++ why ? u should never mutate the exisiting state u should never change the exisiting state instead always  override it by returning a brand new obj and because obj and array r reference  value injs  it's easy to accidently override and check it  existing state . now the more complex our project become more complex it can get to redux correctly
-        showCounter: state.showCounter,
-      };
-    case "decrement":
-      return {
-        counter: state.counter - 1,
-        showCounter: state.showCounter,
-      };
-    case "increase":
-      return {
-        counter: state.counter + action.amount,
-        showCounter: state.showCounter,
-      };
-    case "decrease":
-      return {
-        counter: state.counter - action.amount,
-        showCounter: state.showCounter,
-      };
-    case "toggle":
-      return {
-        showCounter: !state.showCounter,
-        counter: state.counter,
-      };
+export const counterActions =  counterSlice.actions;
 
-    default:
-      return state;
-  }
-};
-
-const store = createStore(counterReducer);
+const store = configureStore({
+  reducer:counterSlice.reducer
+});
 export default store;
