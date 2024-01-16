@@ -1,60 +1,14 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
-// import { createStore } from "redux"; // createslice is powerful than createreducer
+import { configureStore } from "@reduxjs/toolkit";
 
-const initialCounterState = {
-  counter: 0,
-  showCounter: true,
-  isAuthenticated: false,
-};
+import counterSliceReducer from "./counter_slice";
+import authSliceReducer from "./auth_slice";
 
-const counterSlice = createSlice({
-  name: "counterHai",
-  initialState: initialCounterState,
-  reducers: {
-    //obj all reducer
-    increment(state) {
-      state.counter++;
-    },
-    decrement(state) {
-      state.counter--;
-    },
-    increase(state, action) {
-      state.counter = state.counter + action.payload;
-    },
-    decrease(state, action) {
-      state.counter = state.counter - action.payload;
-    },
-    toggleCounter(state) {
-      state.showCounter = !state.showCounter;
-    },
-  },
-});
-//for many reducer we can use combine reducer or configureStore like create store but it makes merging multiple reducer  into one reducer  easier there after and pass the object reducer not reducers
 
-// for auth
-
-// auth state
-const initialAuthState = {
-  isAuthenticated: false,
-};
-const authSlice = createSlice({
-  name: "authentication",
-  initialState: initialAuthState,
-  reducers: {
-    login(state) {
-      state.isAuthenticated = true;
-    },
-    logout(state) {
-      state.isAuthenticated = false;
-    },
-  },
-});
-
-export const counterActions = counterSlice.actions;
-export const authActions  = authSlice.actions;
+// export const counterActions = counterSlice.actions;
+// export const authActions  = authSlice.actions;
 
 const store = configureStore({
-  // reducer: counterSlice.reducer, for multiple reducer
-  reducer: { counter: counterSlice.reducer, auth: authSlice.reducer },
+  
+  reducer: { counter: counterSliceReducer, auth: authSliceReducer},
 });
 export default store;
