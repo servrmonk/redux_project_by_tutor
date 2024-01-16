@@ -1,5 +1,5 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import { createStore } from "redux"; // createslice is powerful than createreducer
+// import { createStore } from "redux"; // createslice is powerful than createreducer
 
 const initialCounterState = {
   counter: 0,
@@ -40,7 +40,7 @@ const initialAuthState = {
 const authSlice = createSlice({
   name: "authentication",
   initialState: initialAuthState,
-  reducer: {
+  reducers: {
     login(state) {
       state.isAuthenticated = true;
     },
